@@ -13,7 +13,7 @@ function App() {
       })
       .then(jsonResult => {
         console.log(jsonResult)
-        setPokemons(jsonResult)
+        setPokemons(jsonResult.results)
       })
       .catch( error => console.log(error))
   }
@@ -23,10 +23,17 @@ function App() {
         <h4>Catch Pokemon</h4>
         <button onClick={catchEmAll}>Throw the Pokeballs!</button>
         <hr/>
-        {JSON.stringify(pokemons)}
+        {/* TO SEE WHAT IS COMING THROUGH
+        {JSON.stringify(pokemons)} */}
         <hr/>
         <ul>
-          <li></li>
+          {
+            pokemons.map( (pokemon, idx) => {
+              return (
+              <li key={idx}>{pokemon.name}</li>
+              )
+            })
+          }
         </ul>
     </div>
   );
