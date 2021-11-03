@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
 
 function App() {
+  // CREATE STATE VARIABLE
+  const [pokemons, setPokemons] = useState([])
+
+  // FUNCTION FOR ONCLICK EVENT, FETCH API?
+  const catchEmAll = () => {
+    fetch("https://pokeapi.co/api/v2/pokemon")
+      .then(result => {
+        return result.json();
+      })
+      .then(jsonResult => {
+        console.log(jsonResult)
+        setPokemons(jsonResult)
+      })
+      .catch( error => console.log(error))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h4>Catch Pokemon</h4>
+        <button onClick={catchEmAll}>Throw the Pokeballs!</button>
+        <hr/>
+        {JSON.stringify(pokemons)}
+        <hr/>
+        <ul>
+          <li></li>
+        </ul>
     </div>
   );
 }
